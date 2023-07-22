@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start:dev": "npx nodemon",
-    "start": "npm run build && node build/index.js",
+    "start": "npm run build && node dist/index.js",
     "lint": "eslint . --ext .ts",
     "prettier-format": "run-script-os",
     "prettier-format:win32": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
@@ -18,6 +18,10 @@
     "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "test": "jest",
     "test:dev": "jest --watchAll"
+  },
+  "engines": {
+    "node": "18.12.1",
+    "npm":"9.1.2"
   },
   "keywords": [],
   "author": "",

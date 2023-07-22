@@ -1,9 +1,10 @@
 import http from 'http';
 import app from './app';
+import 'dotenv/config';
 
 const server = http.createServer(app);
-
-server.listen(5000, () => {
-  console.log('Server listening at 5000')
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Server listening at ${PORT}`);
 });
 

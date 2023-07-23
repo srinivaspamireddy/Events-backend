@@ -1,17 +1,22 @@
-import express, { Express } from 'express';
+import express, { Express, NextFunction } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routers';
 import { errorHandler } from './middlewares/errorHandler';
-import sequelize from './config/sequelize';
+import { AppDataSource } from './config/typeorm';
 
+AppDataSource.initialize().then(() => {
+  console.log('Db connected')
+}).catch((error) => {
+  console.log('Unable to connect to database ', error)
+});
 const app: Express = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(router);
-sequelize.sync();
+
 /// catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((req, res, next:NextFunction) => {
   const err = new Error('Invalid API service');
   next(err);
 });

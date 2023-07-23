@@ -1,6 +1,6 @@
-import { ErrorRequestHandler } from 'express';
+import { ErrorRequestHandler, NextFunction } from 'express';
 
-export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, next:NextFunction) => {
   console.log(err.message, err.statusCode);
   if (res.headersSent) {
     return next(err)

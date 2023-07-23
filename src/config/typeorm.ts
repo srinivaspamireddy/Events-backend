@@ -1,4 +1,5 @@
-import { Sequelize } from 'sequelize';
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
 import 'dotenv/config';
 
 if (process.env.DB_NAME === undefined) {
@@ -24,27 +25,26 @@ if (process.env.DB_POOL_ACQUIRE === undefined) {
 }
 if (process.env.DB_POOL_IDLE === undefined) {
   throw new Error('pool idle Not be undefined')
+} if (process.env.DB_PORT === undefined) {
+  throw new Error('pool idle Not be undefined')
 }
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+
+
+export const AppDataSource = new DataSource({
+  type: "mysql",
   host: process.env.DB_HOST,
-  dialect: 'mysql',
-  // operatorsAliases: {
-  //   $gt: Op.gt
-  // }
-  pool: {
-    max: parseInt(process.env.DB_POOL_MAX) || 5,
-    min: parseInt(process.env.DB_POOL_MIN) || 0,
-    acquire: parseInt(process.env.DB_POOL_ACQUIRE) || 30000,
-    idle: parseInt(process.env.DB_POOL_IDLE) || 10000
-  }
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: true,
+  logging: true,
+  entities: [],
+  subscribers: [],
+  migrations: [],
 });
 
-sequelize.authenticate()
-  .then(() => {
-    console.log("Connection established!!!");
-  })
-  .catch(() => {
-    console.log("Unable to connect");
-  });
 
-export default sequelize;
+
+
+

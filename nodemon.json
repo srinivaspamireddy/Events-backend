@@ -4,5 +4,6 @@
   ],
   "ext": ".ts,.js",
   "ignore": [],
+  "ts":"ts-node",
   "exec": "npx ts-node ./src/index.ts"
 }

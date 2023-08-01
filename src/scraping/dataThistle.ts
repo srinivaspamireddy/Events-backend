@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer';
 import { Events } from '../models/Events';
-import { AppDataSource } from '../config/typeorm';
 import insertData from './insertData';
 
 

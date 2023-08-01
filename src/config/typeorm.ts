@@ -1,6 +1,10 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import 'dotenv/config';
+import { Events } from '../models/Events';
+import { Category } from '../models/Category';
+import { Country } from '../models/Country';
+import { City } from '../models/City';
 
 if (process.env.DB_NAME === undefined) {
   throw new Error('Dbname cannot be undefined')
@@ -39,7 +43,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
-  entities: [],
+  entities: [Events, Category, Country, City],
   subscribers: [],
   migrations: [],
 });
